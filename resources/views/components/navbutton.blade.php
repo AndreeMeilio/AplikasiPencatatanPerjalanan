@@ -9,5 +9,6 @@
         <button class="nav-link px-5 text-dark mx-4" id="nav-form-tab" data-bs-toggle="tab"
             data-bs-target="#form-perjalanan" type="button" role="tab" aria-controls="form-perjalanan"
             aria-selected="false"><strong>Isi Data</strong></button>
+        <button class="nav-link px-5 text-dark mx-4" id="btn_logout" type="button"><strong>Logout</strong></button>
     </div>
 </nav>

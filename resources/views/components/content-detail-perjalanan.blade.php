@@ -25,7 +25,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-danger" id="btn_detail_delete">Delete</button>
                 <button type="button" class="btn btn-success px-4" id="btn_detail_edit">Edit</button>
             </div>

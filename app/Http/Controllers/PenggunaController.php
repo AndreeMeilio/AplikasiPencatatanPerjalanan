@@ -73,7 +73,7 @@ class PenggunaController extends Controller
                     return response()->json(
                         array(
                             "status" => true,
-                            "data" => $data_pengguna
+                            "data" => $data_pengguna["nik"]
                         )
                     , 200);
                 }
@@ -108,7 +108,7 @@ class PenggunaController extends Controller
         $data = $request->only("nik", "nama_lengkap","password");
 
         $validator = Validator::make($data, array(
-            "nik" => ["required", "min:16"],
+            "nik" => ["required"],
             "nama_lengkap" => ["required"],
             "password" => ["required", "min:8"]
         ));

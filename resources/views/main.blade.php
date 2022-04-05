@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
-    <title>PEDULI DIRI</title>
+    <title>YOURNEY</title>
 </head>
 
 <body>

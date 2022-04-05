@@ -1,5 +1,11 @@
-const base_url = "http://localhost:8000/api/v1";
-const nik = "7212543007175262";
+const base_url = "http://127.0.0.1:8000";
+const base_url_api = base_url + "/api/v1";
+let nik = sessionStorage.getItem("nik");
+
+if (nik == null){
+  window.location.href = base_url;
+  console.log(nik);
+}
 
 let urut_berdasarkan = "";
 let format_urut = "";
@@ -15,7 +21,7 @@ function get_all_data_perjalanan(
   format_urut = "",
   page = 1
 ) {
-  let perjalanan_get_url = base_url + "/perjalanan";
+  let perjalanan_get_url = base_url_api + "/perjalanan";
   let html = "";
 
   let data =
@@ -96,7 +102,7 @@ function get_all_data_perjalanan(
 }
 
 function store_data_perjalanan() {
-  let url_create_perjalanan = base_url + "/perjalanan/create";
+  let url_create_perjalanan = base_url_api + "/perjalanan/create";
 
   const tanggal_form = $("#tanggal");
   const waktu_form = $("#waktu");
@@ -143,7 +149,7 @@ function store_data_perjalanan() {
 }
 
 function edit_data_perjalanan(){
-  const url_edit_perjalanan = base_url + "/perjalanan/edit";
+  const url_edit_perjalanan = base_url_api + "/perjalanan/edit";
 
   let id_perjalanan = $(this).val();
   let tanggal = $("#detail_tanggal").val();
@@ -184,7 +190,7 @@ function edit_data_perjalanan(){
 }
 
 function delete_data_perjalanan() {
-  const url_delete_data_perjalanan = base_url + "/perjalanan/delete";
+  const url_delete_data_perjalanan = base_url_api + "/perjalanan/delete";
 
   let id_perjalanan = $(this).val();
 
@@ -231,7 +237,7 @@ function get_detail_perjalanan(){
 }
 
 function get_log_activity() {
-  let url_log_activity = base_url + "/log";
+  let url_log_activity = base_url_api + "/log";
 
   let content_log = $("#content-log");
   let html = "";
@@ -344,7 +350,7 @@ function data_pagination() {
 }
 
 function get_jumlah_halaman() {
-  let url_get_jumlah_halaman = base_url + "/perjalanan/halaman";
+  let url_get_jumlah_halaman = base_url_api + "/perjalanan/halaman";
 
   const settings = {
     cache: false,
@@ -398,6 +404,12 @@ function set_active_page(page_number) {
   });
 }
 
+function logout(){
+  sessionStorage.clear();
+
+  window.location.href = base_url;
+}
+
 $(document).ready(function () {
   get_all_data_perjalanan();
   get_log_activity();
@@ -413,4 +425,6 @@ $(document).ready(function () {
 
   $(document).on("mouseenter", ".content-perjalanan-box", perjalanan_box_enter);
   $(document).on("mouseleave", ".content-perjalanan-box", perjalanan_box_leave);
+
+  $("#btn_logout").on("click", logout);
 });
