@@ -44,6 +44,7 @@
             </div>
         </div>
     </div>
+    @include('components.content-detail-perjalanan')
 
     <script src="{{ asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery/jquery.js') }}"></script>

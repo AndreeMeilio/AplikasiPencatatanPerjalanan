@@ -1,5 +1,5 @@
 const base_url = "http://localhost:8000/api/v1";
-const nik = "1103645810166377";
+const nik = "7212543007175262";
 
 let urut_berdasarkan = "";
 let format_urut = "";
@@ -41,9 +41,20 @@ function get_all_data_perjalanan(
       let dataResponse = response.data;
 
       dataResponse.forEach((element) => {
+        let databsattribute = `
+          data-bs-toggle="modal" 
+          data-bs-target="#detailPerjalanan"
+          data-bs-id_perjalanan = "${element.id_perjalanan}" 
+          data-bs-nik = "${element.nik}"
+          data-bs-tanggal = "${element.tanggal}"
+          data-bs-waktu = "${element.waktu}"
+          data-bs-suhu = "${element.suhu}"
+          data-bs-lokasi = "${element.lokasi}"
+        `;
+
         html += `
         <div class="col-4 mb-3 perjalanan-box">
-            <div class="card content-perjalanan-box">
+            <div class="card content-perjalanan-box" ${databsattribute}>
                 <div class="card-body">
                     <div class="fw-bold fs-5 mb-2 text-center">${element.tanggal} ${element.waktu}</div>
                     <div class="fs-6">Suhu : ${element.suhu} &#8451;</div>
@@ -54,6 +65,12 @@ function get_all_data_perjalanan(
         </div>
       `;
       });
+
+      if (urut_berdasarkan !== ""){
+        page = 1;
+        set_active_page(1);
+      };
+
       loadingElement.hide();
       containerContentPerjalanan.html(html);
     },
@@ -123,6 +140,94 @@ function store_data_perjalanan() {
   };
 
   $.ajax(settings);
+}
+
+function edit_data_perjalanan(){
+  const url_edit_perjalanan = base_url + "/perjalanan/edit";
+
+  let id_perjalanan = $(this).val();
+  let tanggal = $("#detail_tanggal").val();
+  let waktu = $("#detail_waktu").val();
+  let suhu = $("#detail_suhu").val();
+  let lokasi = $("#detail_lokasi").val();
+
+  const settings = {
+    cache: false,
+    url: url_edit_perjalanan,
+    method: "PUT",
+    data : {
+      id_perjalanan: id_perjalanan,
+      tanggal: tanggal,
+      waktu: waktu,
+      suhu: suhu,
+      lokasi: lokasi
+    },
+    dataType: false,
+    success: function (response){
+      Swal.fire(
+        "Data Berhasil Diedit",
+        "Data Perjalanan Yang Anda Pilih Berhasil Diedit",
+        "success"
+      );
+      get_all_data_perjalanan();
+      get_log_activity();
+      get_jumlah_halaman();
+    }, 
+    error: function(response){
+      if (response.status === 400) {
+        Swal.fire("Input Required", response.responseJSON.message, "error");
+      }
+    }
+  }
+
+  $.ajax(settings);
+}
+
+function delete_data_perjalanan() {
+  const url_delete_data_perjalanan = base_url + "/perjalanan/delete";
+
+  let id_perjalanan = $(this).val();
+
+  const settings = {
+    cache: false,
+    url: url_delete_data_perjalanan,
+    data: {
+      id_perjalanan: id_perjalanan
+    },
+    dataType: "json",
+    method: "DELETE",
+    success: function(response){
+      Swal.fire(
+        "Data Berhasil Dihapus",
+        "Data Perjalanan Yang Anda Pilih Berhasil Dihapus",
+        "success"
+      );
+      get_all_data_perjalanan();
+      get_log_activity();
+      get_jumlah_halaman();
+    },
+    error: function(response){
+      console.log(response);
+    }
+  }
+
+  $.ajax(settings);
+}
+
+function get_detail_perjalanan(){
+  let id_perjalanan = $(this).attr("data-bs-id_perjalanan");
+  let nik = $(this).attr("data-bs-nik");
+  let tanggal = $(this).attr("data-bs-tanggal");
+  let waktu = $(this).attr("data-bs-waktu");
+  let suhu = $(this).attr("data-bs-suhu");
+  let lokasi = $(this).attr("data-bs-lokasi");
+
+  $("#detail_tanggal").val(tanggal);
+  $("#detail_waktu").val(waktu);
+  $("#detail_suhu").val(suhu);
+  $("#detail_lokasi").val(lokasi);
+  $("#btn_detail_delete").val(id_perjalanan);
+  $("#btn_detail_edit").val(id_perjalanan);
 }
 
 function get_log_activity() {
@@ -233,6 +338,8 @@ function data_pagination() {
     $("#page-item-next").attr("class", "page-item disabled");
   }
 
+  set_active_page(page);
+
   get_all_data_perjalanan(urut_berdasarkan, format_urut, page);
 }
 
@@ -280,7 +387,16 @@ function get_jumlah_halaman() {
   $.ajax(settings);
 }
 
-function set_active_page(page)
+function set_active_page(page_number) {
+  $(".btn_pagination").css({
+    "background-color" : "whitesmoke",
+  });
+
+  $(`#btn_pagination_${page_number}`).css({
+    "color" : "black",
+    "background-color" : "#198754"
+  });
+}
 
 $(document).ready(function () {
   get_all_data_perjalanan();
@@ -290,6 +406,10 @@ $(document).ready(function () {
   $("#btn_form_submit").on("click", store_data_perjalanan);
   $("#btn_submit_urut").on("click", get_perjalanan_with_format);
   $(document).on("click", ".btn_pagination", data_pagination);
+
+  $(document).on("click", ".content-perjalanan-box", get_detail_perjalanan);
+  $(document).on("click", "#btn_detail_delete", delete_data_perjalanan);
+  $(document).on("click", "#btn_detail_edit", edit_data_perjalanan);
 
   $(document).on("mouseenter", ".content-perjalanan-box", perjalanan_box_enter);
   $(document).on("mouseleave", ".content-perjalanan-box", perjalanan_box_leave);
