@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerjalananController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/pencatatan-perjalanan', [PerjalananController::class, "main_entry"])->name("main");
 

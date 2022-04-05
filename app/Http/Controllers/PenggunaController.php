@@ -108,7 +108,7 @@ class PenggunaController extends Controller
         $data = $request->only("nik", "nama_lengkap","password");
 
         $validator = Validator::make($data, array(
-            "nik" => ["required"],
+            "nik" => ["required", "min:16"],
             "nama_lengkap" => ["required"],
             "password" => ["required", "min:8"]
         ));

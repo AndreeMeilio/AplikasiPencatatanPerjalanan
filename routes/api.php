@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PerjalananController;
+use App\Models\Perjalanan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +33,15 @@ Route::prefix("/v1")->group(function(){
 
     Route::prefix("perjalanan")->group(function() {
         // Route::get("/", [PerjalananController::class, "get_all_data_perjalanan"])->name("perjalanan.get");
+        Route::get("/all", [PerjalananController::class, "get_all_perjalanan"])->name("perjalanan.get");
         Route::post("/", [PerjalananController::class, "get_data_perjalanan"])->name("perjalanan.get.with.nik");
         Route::post("/create", [PerjalananController::class, "create_data_perjalanan"])->name("perjalanan.create");
         Route::delete("/delete", [PerjalananController::class, "delete_data_perjalanan"])->name("perjalanan.delete");
         Route::put("/edit", [PerjalananController::class, "edit_data_perjalanan"])->name("perjalanan.edit");
+        Route::post("/halaman", [PerjalananController::class, "get_jumlah_halaman"])->name("perjalanan.get.halaman");
     });
+
+    Route::post("/log", [LogController::class, "get_log"])->name("log.get");
 });
 
 

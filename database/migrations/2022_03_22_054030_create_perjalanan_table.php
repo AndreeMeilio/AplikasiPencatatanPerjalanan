@@ -16,8 +16,8 @@ class CreatePerjalananTable extends Migration
         Schema::create('perjalanan', function (Blueprint $table) {
             $table->string("id_perjalanan", 255)->primary();
             $table->string("nik", 255);
-            $table->date("tanggal");
-            $table->time("waktu");
+            $table->string("tanggal", 255);
+            $table->string("waktu", 255);
             $table->decimal("suhu");
             $table->text("lokasi");
             $table->timestamps();

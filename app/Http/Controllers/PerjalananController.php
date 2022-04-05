@@ -10,7 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class PerjalananController extends Controller
 {
     //
-    public function get_data_perjalanan(Request $request)
+    public function main_entry()
+    {
+        return view("main");
+    }
+
+    public function get_jumlah_halaman(Request $request)
     {
         $data = $request->only("nik");
         $validator = Validator::make($data, array(
@@ -19,9 +24,51 @@ class PerjalananController extends Controller
 
         if (!$validator->fails()){
             try {
-                $data = $request->only("nik");
-                $data_perjalanan = Perjalanan::where("nik", $data["nik"])->get();
-    
+                $data_perjalanan = Perjalanan::where("nik", $data["nik"])->count();
+                $page = $data_perjalanan / 9;
+
+                return response()->json(
+                    array(
+                        "status" => true,
+                        "page" => ceil($page)
+                    )  
+                , 200);
+            } catch (Exception $e){
+                return response()->json(
+                    array(
+                        "status" => false,
+                        "message" => $e->getMessage()
+                    )
+                , 500);
+            }
+        } else {
+            return response()->json(
+                array(
+                    "status" => false,
+                    "message" => "Format Data Tidak Sesuai",
+                    "detail_message" => $validator->errors()
+                )
+            , 400);
+        }
+    }
+
+    public function get_data_perjalanan(Request $request)
+    {
+        $data = $request->only(["nik", "page", "urut_berdasarkan", "format_urut"]);
+        $validator = Validator::make($data, array(
+            "nik" => ["required"],
+            "page" => ["required"]
+        ));
+        if (!$validator->fails()){
+            $jumlahDataPerPage = 9;
+            $startData = ($data["page"] - 1) * $jumlahDataPerPage;
+
+            try {
+                $data_perjalanan = Perjalanan::where("nik", $data["nik"]);
+                if (array_key_exists("urut_berdasarkan", $data)){
+                    $data_perjalanan->orderBy($data["urut_berdasarkan"], $data["format_urut"]);
+                }
+                $data_perjalanan = $data_perjalanan->offset($startData)->limit($jumlahDataPerPage)->get();
                 if (count($data_perjalanan) != 0){
                     return response()->json(
                         array(
@@ -30,7 +77,7 @@ class PerjalananController extends Controller
                         )  
                     , 200);
                 } else {
-                    $message = "Data Perjalanan Dengan NIK ". $data["nik"]. " Tidak Ditemukan";
+                    $message = "Data Perjalanan Dengan NIK ". $data["nik"]. " Tidak Ditemukan. Isi Data Untuk Menambah Data Perjalanan";
     
                     return response()->json(
                         array(
@@ -67,8 +114,10 @@ class PerjalananController extends Controller
 
         $validation = Validator::make($data_request, array(
             "nik" => ["required"],
-            "tanggal" => ["required", "date", "before:now"],
-            "waktu" => ["required", "date_format:H:i"],
+            // "tanggal" => ["required", "date", "before:now"],
+            // "waktu" => ["required", "date_format:H:i"],
+            "tanggal" => ["required"],
+            "waktu" => ["required"],
             "suhu" => ["required", "numeric"],
             "lokasi" => ["required"]
         ));
@@ -98,7 +147,7 @@ class PerjalananController extends Controller
             return response()->json(
                 array(
                     "status" => false,
-                    "message" => "Format Data Tidak Sesuai",
+                    "message" => "Harap masukkan semua data dengan benar",
                     "detail_message" => $validation->errors()
                 )
             , 400);  
