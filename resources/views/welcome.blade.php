@@ -15,16 +15,24 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container flex-column align-items-stretch">
         <nav class="navbar navbar-expand-lg navbar-transparant bg-transparant">
             <div class="container-fluid mt-3 mb-5">
-                <a class="navbar-brand text-dark" href="#"><strong>YOURNEY</strong></a>
+                <a class="navbar-brand text-dark fs-3" href="#"><strong>YOURNEY</strong></a>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <button class="btn btn-primary me-3 px-4" data-bs-toggle="modal" data-bs-target="#modal_login" id="btn_login">Login</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_register" id="btn_register">Register</button>
+                    <button class="btn btn-success me-3 px-4" data-bs-toggle="modal" data-bs-target="#modal_login" id="btn_login">Login</button>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_register" id="btn_register">Register</button>
                 </div>  
             </div>
         </nav>
+        <div class="row">
+            <div class="col-6  d-flex align-items-stretch">
+                <img class="img-fluid" width="75%" src="{{ asset('assets/image/Globalization-pana.png') }}" alt="">
+            </div>
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="fs-1 fw-bold text-center" id="txtLandingPage"></div>
+            </div>
+        </div>
     </div>
 
     @include('components.modal_register')
