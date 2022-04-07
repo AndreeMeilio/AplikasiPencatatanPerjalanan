@@ -73,7 +73,10 @@ class PenggunaController extends Controller
                     return response()->json(
                         array(
                             "status" => true,
-                            "data" => $data_pengguna["nik"]
+                            "data" => array(
+                                "nik" => $data_pengguna->nik,
+                                "nama_lengkap" => $data_pengguna->nama_lengkap
+                            )
                         )
                     , 200);
                 }

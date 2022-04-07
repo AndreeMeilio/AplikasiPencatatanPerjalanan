@@ -5,8 +5,8 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-3 d-flex align-items-center">Urutkan Berdasarkan</div>
-                <div class="col-3">
+                <div class="col-12 col-md-3 mb-2 d-flex align-items-center">Urutkan Berdasarkan</div>
+                <div class="col-6 col-md-3 mb-2">
                     <form>
                         <select class="form-select" name="urut_data_form" id="urut_berdasarkan">
                             <option value="tanggal" selected>Tanggal</option>
@@ -14,7 +14,7 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-md-3 mb-2">
                     <form>
                         <select class="form-select" name="format_urut" id="format_urut">
                             <option value="asc" selected>Ascending</option>
@@ -22,12 +22,13 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-md-3 mb-2">
                     <button class="btn btn-success" type="button" id="btn_submit_urut">Submit</button>
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="row" id="container-content-perjalanan">
         <div class="d-flex justify-content-center" id="loading">
             <div class="spinner-border text-dark fw-bold" style="width: 3rem; height: 3rem;" role="status">
@@ -37,19 +38,7 @@
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination align-items-end justify-content-end" id="pagination">
-            {{-- <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><button class="page-link btn_pagination" value="1">1</button></li>
-            <li class="page-item"><button class="page-link btn_pagination" value="2">2</button></li>
-            <li class="page-item"><button class="page-link btn_pagination" value="3">3</button></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li> --}}
+            
         </ul>
     </nav>
 </div>

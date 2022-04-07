@@ -4,7 +4,7 @@
             DASHBOARD
         </div>
         <div class="card-body">
-            <div>Selamat Datang Andree Meilio Caniago Di Aplikasi Peduli Diri</div>
+            <div id="txtWelcome"></div>
         </div>
     </div>
 </div>

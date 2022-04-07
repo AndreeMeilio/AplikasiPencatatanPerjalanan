@@ -62,7 +62,8 @@ function login_pengguna() {
     dataType: "json",
     success: function (response) {
       console.log(response);
-      sessionStorage.setItem("nik", response.data);
+      sessionStorage.setItem("nik", response.data.nik);
+      sessionStorage.setItem("nama_lengkap", response.data.nama_lengkap)
       window.location.href = base_url + "/pencatatan-perjalanan";
     },
     error: function (response) {
@@ -77,10 +78,10 @@ function login_pengguna() {
 }
 
 function typeWriter() {
-  if (i < txt.length) {
-    let elementTxtLandingPage = $("#txtLandingPage").text();
-    let txtLandingPage = elementTxtLandingPage + txt.charAt(i);
+  let elementTxtLandingPage = $("#txtLandingPage").text();
+  let txtLandingPage = elementTxtLandingPage + txt.charAt(i);
 
+  if (i < txt.length) {
     $("#txtLandingPage").text(txtLandingPage);
     i++;
     setTimeout(typeWriter, speed);

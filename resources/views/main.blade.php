@@ -19,23 +19,26 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4 mt-3 d-flex align-items-center justify-content-center">
-                <img class="img-fluid w-25" src="{{ asset('assets/image/logosementara.png') }}"
+            <div class="col-12 col-md-4 mt-3 d-flex align-items-center justify-content-center">
+                <img class="img-fluid w-25 d-none d-md-block" src="{{ asset('assets/image/logosementara.png') }}"
                     alt="Logo sementara dari aplikasi peduli diri">
             </div>
-            <div class="col-8 mt-3 d-flex align-items-center">
-                <div class="my-3">
-                    <h2><strong>PEDULI DIRI</strong></h2>
+            <div class="col-12 col-md-8 mt-3 d-flex align-items-center justify-content-center">
+                <div class="my-3 ms-3 text-center">
+                    <h2><strong>YOURNEY</strong></h2>
                     <h6>Catatan Perjalanan</h6>
                     @include('components/navbutton')
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-4 px-5 text-center">
+            <div class="col-12 col-md-4 px-5 text-center">
                 @include('components.logs')
             </div>
-            <div class="col-8 pe-5">
+            <div class="d-block d-md-none">
+                <hr class="border border-2 border-dark">
+            </div>
+            <div class="col-12 col-md-8 px-5">
                 <div class="tab-content" id="nav-tabContent">
                     @include('components/content-dashboard')
                     @include('components/content-perjalanan')

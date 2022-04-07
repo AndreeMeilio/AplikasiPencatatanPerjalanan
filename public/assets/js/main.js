@@ -1,11 +1,8 @@
 const base_url = "http://127.0.0.1:8000";
 const base_url_api = base_url + "/api/v1";
-let nik = sessionStorage.getItem("nik");
 
-if (nik == null){
-  window.location.href = base_url;
-  console.log(nik);
-}
+let nik = sessionStorage.getItem("nik");
+let nama_lengkap = sessionStorage.getItem("nama_lengkap");
 
 let urut_berdasarkan = "";
 let format_urut = "";
@@ -15,6 +12,7 @@ let jumlah_page = "";
 let containerContentPerjalanan = $("#container-content-perjalanan");
 let loadingElement = $("#loading");
 let paginationElement = $("#pagination");
+let txtWelcomeElement = $("#txtWelcome");
 
 function get_all_data_perjalanan(
   urut_berdasarkan = "",
@@ -59,7 +57,7 @@ function get_all_data_perjalanan(
         `;
 
         html += `
-        <div class="col-4 mb-3 perjalanan-box">
+        <div class="col-12 col-md-4 mb-3 perjalanan-box">
             <div class="card content-perjalanan-box" ${databsattribute}>
                 <div class="card-body">
                     <div class="fw-bold fs-5 mb-2 text-center">${element.tanggal} ${element.waktu}</div>
@@ -71,11 +69,6 @@ function get_all_data_perjalanan(
         </div>
       `;
       });
-
-      if (urut_berdasarkan !== ""){
-        page = 1;
-        set_active_page(1);
-      };
 
       loadingElement.hide();
       containerContentPerjalanan.html(html);
@@ -175,6 +168,10 @@ function edit_data_perjalanan(){
         "Data Perjalanan Yang Anda Pilih Berhasil Diedit",
         "success"
       );
+      // $("#detailPerjalanan").css({
+      //   "display": "none"
+      // });
+      // $("#detailPerjalanan").prop("aria-hidden", true);
       get_all_data_perjalanan();
       get_log_activity();
       get_jumlah_halaman();
@@ -208,6 +205,12 @@ function delete_data_perjalanan() {
         "Data Perjalanan Yang Anda Pilih Berhasil Dihapus",
         "success"
       );
+
+      // $("#detailPerjalanan").css({
+      //   "display": "none"
+      // });
+      // $("#detailPerjalanan").prop("aria-hidden", true);
+
       get_all_data_perjalanan();
       get_log_activity();
       get_jumlah_halaman();
@@ -299,6 +302,9 @@ function get_perjalanan_with_format() {
   urut_berdasarkan = $("#urut_berdasarkan").children("option:selected").val();
   format_urut = $("#format_urut").children("option:selected").val();
 
+  page = 1;
+  set_active_page(page);
+
   loadingElement.show();
   get_all_data_perjalanan(urut_berdasarkan, format_urut);
 }
@@ -337,7 +343,7 @@ function data_pagination() {
   } else {
     page = btn_pagination_value;
   }
-
+console.log(page);
   if (page == 1){
     $("#page-item-prev").attr("class", "page-item disabled");
   } else if (page == jumlah_page){
@@ -404,16 +410,23 @@ function set_active_page(page_number) {
   });
 }
 
+function set_nama_welcome(){
+  let textWelcome = `Selamat Datang ${nama_lengkap} Di Aplikasi Peduli Diri`;
+
+  txtWelcomeElement.text(textWelcome);
+}
+
 function logout(){
   sessionStorage.clear();
 
   window.location.href = base_url;
 }
 
-$(document).ready(function () {
+$(document).ready(function () {  
   get_all_data_perjalanan();
   get_log_activity();
   get_jumlah_halaman();
+  set_nama_welcome();
 
   $("#btn_form_submit").on("click", store_data_perjalanan);
   $("#btn_submit_urut").on("click", get_perjalanan_with_format);
