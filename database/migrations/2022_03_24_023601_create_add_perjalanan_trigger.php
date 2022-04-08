@@ -20,7 +20,7 @@ class CreateAddPerjalananTrigger extends Migration
                     INSERT INTO log(log.id_table, log.nik, log.desc, log.created_at, log.updated_at) values (
                         NEW.id_perjalanan,
                         NEW.nik,
-                        'Menambahkan Data Perjalanan Baru',
+                        CONCAT('Menambahkan Data Perjalanan Baru Lokasi ', NEW.lokasi),
                         now(),
                         now()
                     );

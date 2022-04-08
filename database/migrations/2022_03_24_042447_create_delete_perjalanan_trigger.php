@@ -20,7 +20,7 @@ class CreateDeletePerjalananTrigger extends Migration
             INSERT INTO log(log.id_table, log.nik, log.desc, log.created_at, log.updated_at) values (
                 OLD.id_perjalanan,
                 OLD.nik,
-                'Anda Menghapus Data Perjalanan',
+                CONCAT('Anda Menghapus Data Perjalanan Lokasi ', OLD.lokasi),
                 now(),
                 now()
             );

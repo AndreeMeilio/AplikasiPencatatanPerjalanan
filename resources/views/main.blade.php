@@ -47,6 +47,9 @@
             </div>
         </div>
     </div>
+    <div class="py-3 bg-secondary">
+        testing
+    </div>
     @include('components.content-detail-perjalanan')
 
     <script src="{{ asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>

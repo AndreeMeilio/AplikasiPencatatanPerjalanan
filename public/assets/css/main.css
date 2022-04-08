@@ -1,6 +1,6 @@
-/* * {
+* {
   border: 1px solid black;
-} */
+}
 
 body {
   /* background-image: url("http://127.0.0.1:8000/assets/image/bgimage1 1.png");
@@ -10,14 +10,39 @@ body {
 }
 
 div.content-log {
-  height: 80vh;
+  height: 50vh;
   overflow: scroll;
 }
+
+div.card{
+  box-shadow: 5px 5px 5px grey;
+}
+
 /* div.content-perjalanan-box {
   box-shadow: 0px 0px 25px rgb(103, 88, 192);
 } */
 .btn_pagination{
   color: black;
+}
+
+.carousel-item{
+  height: 30rem;
+}
+#carousel-item-1{
+  background-image: url('/assets/image/bgimage1.jpg');
+  /* background-size: inherit; */
+  background-position: center;
+  text-align: center;
+}
+#carousel-item-2{
+  background-image: url('/assets/image/bgimage2.jpg');
+  /* background-size: inherit; */
+  background-position: center;
+}
+#carousel-item-3{
+  background-image: url('/assets/image/bgimage3.jpg');
+  /* background-size: inherit; */
+  background-position: center;
 }
 
 @media only screen and (max-width: 600px) {

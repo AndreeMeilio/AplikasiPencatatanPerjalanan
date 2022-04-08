@@ -9,6 +9,6 @@
         <button class="nav-link px-5 text-dark" id="nav-form-tab" data-bs-toggle="tab"
             data-bs-target="#form-perjalanan" type="button" role="tab" aria-controls="form-perjalanan"
             aria-selected="false"><img class="img-fluid me-2" width="25rem" src="{{ asset('assets/image/database.svg') }}" alt="Icon House"><strong>Isi Data</strong></button>
-        <button class="nav-link px-5 text-dark" id="btn_logout" type="button"><strong>Logout</strong></button>
+        <button class="nav-link px-5 text-dark" id="btn_logout" type="button"><img class="img-fluid me-2" width="25rem" src="{{ asset('assets/image/arrow-right-from-bracket-solid.svg') }}" alt="Icon House"><strong>Logout</strong></button>
     </div>
 </nav>

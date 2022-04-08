@@ -294,7 +294,7 @@ function perjalanan_box_enter() {
 
 function perjalanan_box_leave() {
   $(this).css({
-    "box-shadow": "0px 0px 0px rgb(0, 0, 0)",
+    "box-shadow": "5px 5px 5px grey"
   });
 }
 
