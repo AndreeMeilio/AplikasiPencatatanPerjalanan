@@ -39,6 +39,7 @@ Route::prefix("/v1")->group(function(){
         Route::delete("/delete", [PerjalananController::class, "delete_data_perjalanan"])->name("perjalanan.delete");
         Route::put("/edit", [PerjalananController::class, "edit_data_perjalanan"])->name("perjalanan.edit");
         Route::post("/halaman", [PerjalananController::class, "get_jumlah_halaman"])->name("perjalanan.get.halaman");
+        
     });
 
     Route::post("/log", [LogController::class, "get_log"])->name("log.get");

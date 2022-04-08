@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4 px-5 text-center">
+            <div class="col-12 col-md-4 px-5 mb-3 text-center">
                 @include('components.logs')
             </div>
             <div class="d-block d-md-none">
@@ -47,9 +47,13 @@
             </div>
         </div>
     </div>
-    <div class="py-3 bg-secondary">
-        testing
+    <div class="d-flex align-items-stretch pt-2 pb-2 bg-light">
+        <div class="container">
+            <span class="float-start">Copyright&copy; 2022</span>
+            <span class="float-end">Made With &hearts; By Andree Meilio Caniago</span>
+        </div>
     </div>
+
     @include('components.content-detail-perjalanan')
 
     <script src="{{ asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>

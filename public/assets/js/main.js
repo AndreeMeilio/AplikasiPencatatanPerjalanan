@@ -310,27 +310,6 @@ function get_perjalanan_with_format() {
 }
 
 function data_pagination() {
-  // let html = "";
-  // if (page != (jumlah_page - 1) && (page != 2) && page != 1){
-  //   html += `
-  //     <li class="page-item" id="page-item-prev">
-  //         <button class="page-link btn_pagination" value="prev" aria-label="Previous">
-  //             <span aria-hidden="true">&laquo;</span>
-  //         </button>
-  //     </li>
-  //     <li class="page-item"><button class="page-link btn_pagination" id="btn_pagination_${parseInt(page) - 1}" value="${parseInt(page) - 1}">${parseInt(page) - 1}</button></li>
-  //     <li class="page-item"><button class="page-link btn_pagination" id="btn_pagination_${page}" value="${page}">${page}</button></li>
-  //     <li class="page-item"><button class="page-link btn_pagination" id="btn_pagination_${parseInt(page) + 1}" value="${parseInt(page) + 1}">${parseInt(page) + 1}</button></li>
-  //     <li class="page-item" id="page-item-next">
-  //         <button class="page-link btn_pagination" value="next" aria-label="Next">
-  //             <span aria-hidden="true">&raquo;</span>
-  //         </button>
-  //     </li>
-  //   `;
-
-  //   paginationElement.html(html);
-  // }
-
   $("#page-item-prev").attr("class", "page-item");
   $("#page-item-next").attr("class", "page-item");
 
@@ -369,6 +348,8 @@ function get_jumlah_halaman() {
     success: function (response) {
       let html = "";
       jumlah_page = response.page;
+      
+      let isHalamanFirst = jumlah_page == 1 ? "disabled" : "";
 
       html += `
       <li class="page-item disabled" id="page-item-prev">
@@ -385,7 +366,7 @@ function get_jumlah_halaman() {
       }
 
       html += `
-      <li class="page-item" id="page-item-next">
+      <li class="page-item ${isHalamanFirst}" id="page-item-next">
           <button class="page-link btn_pagination" value="next" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
           </button>
@@ -427,6 +408,7 @@ $(document).ready(function () {
   get_log_activity();
   get_jumlah_halaman();
   set_nama_welcome();
+  $("#nik_for_export").val(nik);
 
   $("#btn_form_submit").on("click", store_data_perjalanan);
   $("#btn_submit_urut").on("click", get_perjalanan_with_format);

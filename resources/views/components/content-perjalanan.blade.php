@@ -22,8 +22,15 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-12 col-md-3 mb-2">
+                <div class="col-12 col-md-2 mb-2">
                     <button class="btn btn-success" type="button" id="btn_submit_urut">Submit</button>
+                </div>
+                <div class="col-12 col-md-1 mb-2">
+                    <form action="{{ route("perjalanan.export") }}" method="POST">
+                        @csrf
+                        <input type="text" name="nik" id="nik_for_export" hidden>
+                        <button class="btn btn-transparant" type="submit"><img class="img-fluid w-100" src="{{ asset("assets/image/download.svg") }}" alt="Logo Download"></button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/pencatatan-perjalanan', [PerjalananController::class, "main_entry"])->name("main");
-
+Route::post("/export", [PerjalananController::class, "export_perjalnan"])->name("perjalanan.export");

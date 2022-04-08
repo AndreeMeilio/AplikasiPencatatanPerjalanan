@@ -6,6 +6,8 @@ use App\Models\Perjalanan;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\PerjalananExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PerjalananController extends Controller
 {
@@ -245,6 +247,28 @@ class PerjalananController extends Controller
                     )
                 , 500);
             }
+        } else {
+            return response()->json(
+                array(
+                    "status" => false,
+                    "message" => "Format Data Tidak Sesuai",
+                    "detail_message" => $validator->errors()
+                )
+            , 400);  
+        }
+    }
+
+    public function export_perjalnan(Request $request)
+    {
+        $data = $request->only("nik");
+        $validator = Validator::make($data, array(
+            "nik" => ["required"]
+        ));
+
+        if (!$validator->fails()){
+            $export = new PerjalananExport($data["nik"]);
+
+            return Excel::download($export, 'data_perjalanan.xlsx');
         } else {
             return response()->json(
                 array(
