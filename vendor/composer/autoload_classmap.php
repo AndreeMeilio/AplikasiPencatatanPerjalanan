@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\PerjalananExport' => $baseDir . '/app/Exports/PerjalananExport.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\LogController' => $baseDir . '/app/Http/Controllers/LogController.php',
     'App\\Http\\Controllers\\PenggunaController' => $baseDir . '/app/Http/Controllers/PenggunaController.php',
@@ -845,7 +846,6 @@ return array(
     'Faker\\Provider\\nl_BE\\Payment' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_BE/Payment.php',
     'Faker\\Provider\\nl_BE\\Person' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_BE/Person.php',
     'Faker\\Provider\\nl_BE\\PhoneNumber' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_BE/PhoneNumber.php',
-    'Faker\\Provider\\nl_BE\\Text' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_BE/Text.php',
     'Faker\\Provider\\nl_NL\\Address' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_NL/Address.php',
     'Faker\\Provider\\nl_NL\\Color' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_NL/Color.php',
     'Faker\\Provider\\nl_NL\\Company' => $vendorDir . '/fakerphp/faker/src/Faker/Provider/nl_NL/Company.php',

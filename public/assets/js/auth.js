@@ -35,9 +35,20 @@ function register_pengguna() {
       if (response.status === 400) {
         Swal.fire(
           "Register",
-          "Harap Memasukkan Format Data Dengan Benar",
+          "Harap Mengisi Semua Data Pada Form Dengan Benar",
           "error"
         );
+        $data_error = response.responseJSON.detail_message;
+
+        if ("nik" in $data_error){
+          $("#register_nik").prop("class", "form-control is-invalid");
+        } 
+        if ("nama_lengkap" in $data_error){
+          $("#register_nama_lengkap").prop("class", "form-control is-invalid");
+        } 
+        if ("password" in $data_error){
+          $("#register_password").prop("class", "form-control is-invalid");
+        }
       }
     },
   };
@@ -70,6 +81,14 @@ function login_pengguna() {
       console.log(response);
       if (response.status === 404 || response.status === 400) {
         Swal.fire("Login", "Credential does not match with our data", "error");
+        $data_error = response.responseJSON.detail_message;
+
+        if ("nik" in $data_error){
+          $("#login_nik").prop("class", "form-control is-invalid");
+        } 
+        if ("password" in $data_error){
+          $("#login_password").prop("class", "form-control is-invalid");
+        }
       }
     },
   };
@@ -77,20 +96,7 @@ function login_pengguna() {
   $.ajax(settings);
 }
 
-function typeWriter() {
-  let elementTxtLandingPage = $("#txtLandingPage").text();
-  let txtLandingPage = elementTxtLandingPage + txt.charAt(i);
-
-  if (i < txt.length) {
-    $("#txtLandingPage").text(txtLandingPage);
-    i++;
-    setTimeout(typeWriter, speed);
-  }
-}
-
 $(document).ready(function () {
-  typeWriter();
-
   $("#btn_submit_register").on("click", register_pengguna);
   $("#btn_submit_login").on("click", login_pengguna);
 });

@@ -6,11 +6,11 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="mb-3">
+                    <div class="mb-3" id="form_login_nik">
                         <label for="nik" class="col-form-label">NIK</label>
                         <input class="form-control" type="text" id="login_nik" name="nik" placeholder="Masukkan Nik Anda">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="form_login_password">
                         <label for="password" class="col-form-label">Password</label>
                         <input class="form-control" type="password" id="login_password" name="password" placeholder="Masukkan Password Yang Akan Dipakai">
                     </div>

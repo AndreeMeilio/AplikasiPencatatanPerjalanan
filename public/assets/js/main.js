@@ -127,6 +127,10 @@ function store_data_perjalanan() {
         "Data Perjalanan Yang Anda Masukkan Berhasil Disimpan",
         "success"
       );
+      $("#tanggal").prop("class", "form-control");
+      $("#waktu").prop("class", "form-control");
+      $("#suhu").prop("class", "form-control");
+      $("#lokasi").prop("class", "form-control");
       get_all_data_perjalanan();
       get_log_activity();
       get_jumlah_halaman();
@@ -134,6 +138,20 @@ function store_data_perjalanan() {
     error: function (response) {
       if (response.status === 400) {
         Swal.fire("Input Required", response.responseJSON.message, "error");
+        $data_error = response.responseJSON.detail_message;
+
+        if ("tanggal" in $data_error){
+          $("#tanggal").prop("class", "form-control is-invalid");
+        } 
+        if ("waktu" in $data_error){
+          $("#waktu").prop("class", "form-control is-invalid");
+        } 
+        if ("suhu" in $data_error){
+          $("#suhu").prop("class", "form-control is-invalid");
+        }
+        if ("lokasi" in $data_error){
+          $("#lokasi").prop("class", "form-control is-invalid");
+        }
       }
     },
   };
@@ -168,10 +186,10 @@ function edit_data_perjalanan(){
         "Data Perjalanan Yang Anda Pilih Berhasil Diedit",
         "success"
       );
-      // $("#detailPerjalanan").css({
-      //   "display": "none"
-      // });
-      // $("#detailPerjalanan").prop("aria-hidden", true);
+      $("#detail_tanggal").prop("class", "form-control");
+      $("#detail_waktu").prop("class", "form-control");
+      $("#detail_suhu").prop("class", "form-control");
+      $("#detail_lokasi").prop("class", "form-control");
       get_all_data_perjalanan();
       get_log_activity();
       get_jumlah_halaman();
@@ -179,6 +197,20 @@ function edit_data_perjalanan(){
     error: function(response){
       if (response.status === 400) {
         Swal.fire("Input Required", response.responseJSON.message, "error");
+        $data_error = response.responseJSON.detail_message;
+
+        if ("tanggal" in $data_error){
+          $("#detail_tanggal").prop("class", "form-control is-invalid");
+        } 
+        if ("waktu" in $data_error){
+          $("#detail_waktu").prop("class", "form-control is-invalid");
+        } 
+        if ("suhu" in $data_error){
+          $("#detail_suhu").prop("class", "form-control is-invalid");
+        }
+        if ("lokasi" in $data_error){
+          $("#detail_lokasi").prop("class", "form-control is-invalid");
+        }
       }
     }
   }
@@ -216,7 +248,6 @@ function delete_data_perjalanan() {
       get_jumlah_halaman();
     },
     error: function(response){
-      console.log(response);
     }
   }
 
@@ -254,8 +285,6 @@ function get_log_activity() {
       nik: nik,
     },
     success: function (response) {
-      console.log(response);
-
       let dataResponse = response.data;
       dataResponse.forEach((element) => {
         html += `
@@ -304,6 +333,8 @@ function get_perjalanan_with_format() {
 
   page = 1;
   set_active_page(page);
+  $("#page-item-prev").attr("class", "page-item disabled");
+  $("#page-item-next").attr("class", "page-item");
 
   loadingElement.show();
   get_all_data_perjalanan(urut_berdasarkan, format_urut);
@@ -322,7 +353,6 @@ function data_pagination() {
   } else {
     page = btn_pagination_value;
   }
-console.log(page);
   if (page == 1){
     $("#page-item-prev").attr("class", "page-item disabled");
   } else if (page == jumlah_page){
@@ -348,8 +378,7 @@ function get_jumlah_halaman() {
     success: function (response) {
       let html = "";
       jumlah_page = response.page;
-      
-      let isHalamanFirst = jumlah_page == 1 ? "disabled" : "";
+      let isHalamanFirst = jumlah_page == 1 || jumlah_page == 0 ? "disabled" : "";
 
       html += `
       <li class="page-item disabled" id="page-item-prev">
